@@ -83,7 +83,7 @@ VITE_APP_ENV=prod
 |------|------|--------|------|
 | outDir | string | 'dist-prod' | 输出目录 |
 | days | number | 2 | 保留天数 |
-| now | number | Date.now() | 当前时间戳（用于测试） |
+| now | number | Date.now() | 版本目录名（如时间戳） |
 
 > 删除超过指定天数的旧版本，最少保留1个旧版本
 
