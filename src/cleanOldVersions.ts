@@ -50,17 +50,12 @@ export function cleanOldVersions(options: CleanOldVersionsOptions): Plugin {
             })
           }
         }
-
+        const maxOldTimestamp =  Math.max(...oldVersions.map(i => i.timestamp))
+        console.log(`[clean-old-versions] 超过${days}天最大保留历史为:${maxOldTimestamp}`)
         let deletedCount = 0
 
-        oldVersions.forEach(item => {
+        oldVersions.filter(i => i.timestamp !== maxOldTimestamp).forEach(item => {
           const { dirPath, entryName } = item
-
-          if (oldVersions.length - deletedCount <= 1) {
-            console.log(`[clean-old-versions] 触发最少保留超过1天的一个旧历史: ${entryName}`)
-            return
-          }
-
           fs.rmSync(dirPath, { recursive: true, force: true })
           console.log(`[clean-old-versions] 已删除: ${entryName}`)
           deletedCount++
